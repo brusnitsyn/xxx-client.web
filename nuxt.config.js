@@ -33,6 +33,7 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     "@nuxtjs/axios",
+    "dropzone-nuxt",
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios

@@ -188,7 +188,7 @@
             <span class="leading-5 text-gray-600 select-none">Корзина</span>
             <span class="leading-5">2476,0 Р</span>
           </div>
-          <div
+          <!-- <div
             class="
               absolute
               top-0
@@ -235,7 +235,7 @@
                 <span class="text-center">Корзина пуста</span>
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
 
