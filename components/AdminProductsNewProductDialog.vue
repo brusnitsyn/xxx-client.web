@@ -60,7 +60,67 @@
 
           <div class="col-span-6 md:col-span-3 space-y-1">
             <label for="product-category" class="text-sm">Категория</label>
-            <input
+            <div class="relative inline-flex w-full">
+              <svg
+                class="w-2 h-2 absolute top-0 right-0 m-4 pointer-events-none"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 412 232"
+              >
+                <path
+                  d="M206 171.144L42.678 7.822c-9.763-9.763-25.592-9.763-35.355 0-9.763 9.764-9.763 25.592 0 35.355l181 181c4.88 4.882 11.279 7.323 17.677 7.323s12.796-2.441 17.678-7.322l181-181c9.763-9.764 9.763-25.592 0-35.355-9.763-9.763-25.592-9.763-35.355 0L206 171.144z"
+                  fill="#648299"
+                  fill-rule="nonzero"
+                />
+              </svg>
+              <select
+                class="
+                  p-2
+                  focus:outline-none
+                  focus:border-opacity-0
+                  focus:ring-2
+                  focus:ring-accent
+                  border border-gray-300
+                  rounded-lg
+                  bg-gray-100
+                  shadow
+                  w-full
+                  appearance-none
+                "
+                id="product-color"
+                name="product-color"
+              >
+              <option>Выберите категорию</option>
+                <optgroup label="Для нее">
+                  <option>Анальные стимуляторы</option>
+                  <option>Вагинальные шарики</option>
+                  <option>Вакуумные помпы</option>
+                  <option>Вибраторы</option>
+                  <option>Вибротрусики, бабочки</option>
+                  <option>Духи с феомонами</option>
+                  <option>Лубриканты</option>
+                  <option>Препараты</option>
+                  <option>Стимуляторы для груди</option>
+                  <option>Клиторальные вибраторы</option>
+                  <option>Страпоны</option>
+                  <option>Фаллоимитаторы</option>
+                </optgroup>
+                <optgroup label="Для него">
+                  <option>Анальные стимуляторы</option>
+                  <option>Вакуумные помпы</option>
+                  <option>Вибраторы</option>
+                  <option>Вагины и мастурбаторы</option>
+                  <option>Кольца, насадки, утяжки</option>
+                  <option>Духи с феромонами</option>
+                  <option>Препараты</option>
+                  <option>Секс куклы</option>
+                  <option>Страпоны</option>
+                  <option>Фаллоимитаторы</option>
+                  <option>Экстендеры</option>
+                  <option>Фаллопротезы</option>
+                </optgroup>
+              </select>
+            </div>
+            <!-- <input
               type="text"
               v-model="form.category_id"
               name="product-category"
@@ -78,16 +138,16 @@
                 shadow
                 w-full
               "
-            />
+            /> -->
           </div>
 
           <div class="col-span-6 md:col-span-3 space-y-1">
-            <label for="product-author" class="text-sm">Производитель</label>
+            <label for="product-manufacturer" class="text-sm">Производитель</label>
             <input
               type="text"
               v-model="form.manufacturer"
-              name="product-author"
-              id="product-author"
+              name="product-manufacturer"
+              id="product-manufacturer"
               placeholder="Makenze"
               class="
                 p-2
@@ -128,8 +188,48 @@
           </div>
 
           <div class="col-span-6 md:col-span-3 space-y-1">
-            <label for="product-color" class="text-sm">Цвет</label>
-            <input
+            <label for="product-color" class="text-sm">Цвет </label>
+            <div class="relative inline-flex w-full">
+              <svg
+                class="w-2 h-2 absolute top-0 right-0 m-4 pointer-events-none"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 412 232"
+              >
+                <path
+                  d="M206 171.144L42.678 7.822c-9.763-9.763-25.592-9.763-35.355 0-9.763 9.764-9.763 25.592 0 35.355l181 181c4.88 4.882 11.279 7.323 17.677 7.323s12.796-2.441 17.678-7.322l181-181c9.763-9.764 9.763-25.592 0-35.355-9.763-9.763-25.592-9.763-35.355 0L206 171.144z"
+                  fill="#648299"
+                  fill-rule="nonzero"
+                />
+              </svg>
+              <select
+                class="
+                  p-2
+                  focus:outline-none
+                  focus:border-opacity-0
+                  focus:ring-2
+                  focus:ring-accent
+                  border border-gray-300
+                  rounded-lg
+                  bg-gray-100
+                  shadow
+                  w-full
+                  appearance-none
+                "
+                id="product-color"
+                name="product-color"
+              >
+                <option>Выберите цвет</option>
+                <option>Красный</option>
+                <option>Синий</option>
+                <option>Желтый</option>
+                <option>Черный</option>
+                <option>Оранжевый</option>
+                <option>Пурпурный</option>
+                <option>Серый</option>
+                <option>Белый</option>
+              </select>
+            </div>
+            <!-- <input
               type="text"
               name="product-color"
               id="product-color"
@@ -147,17 +247,17 @@
                 shadow
                 w-full
               "
-            />
+            /> -->
           </div>
 
           <div class="col-span-6 md:col-span-3 space-y-1">
             <label for="product-weight" class="text-sm">Вес</label>
             <input
-              type="number"
+              type="text"
               name="product-weight"
               v-model="form.weight"
               id="product-weight"
-              placeholder="0000"
+              placeholder="0000,00"
               class="
                 p-2
                 focus:outline-none
@@ -176,7 +276,7 @@
           <div class="col-span-6 md:col-span-3 space-y-1">
             <label for="product-article" class="text-sm">Артикул</label>
             <input
-              type="number"
+              type="text"
               v-model="form.article"
               name="product-article"
               id="product-article"
@@ -199,11 +299,11 @@
           <div class="col-span-6 md:col-span-3 space-y-1">
             <label for="product-cost" class="text-sm">Стоимость</label>
             <input
-              type="number"
+              type="text"
               v-model="form.cost"
               name="product-cost"
               id="product-cost"
-              placeholder="0000.00"
+              placeholder="0000000,00"
               class="
                 p-2
                 focus:outline-none
