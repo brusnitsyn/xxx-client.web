@@ -89,7 +89,7 @@
                 id="product-color"
                 name="product-color"
               >
-              <option>Выберите категорию</option>
+                <option>Выберите категорию</option>
                 <optgroup label="Для нее">
                   <option>Анальные стимуляторы</option>
                   <option>Вагинальные шарики</option>
@@ -142,7 +142,9 @@
           </div>
 
           <div class="col-span-6 md:col-span-3 space-y-1">
-            <label for="product-manufacturer" class="text-sm">Производитель</label>
+            <label for="product-manufacturer" class="text-sm"
+              >Производитель</label
+            >
             <input
               type="text"
               v-model="form.manufacturer"
@@ -426,7 +428,13 @@
 </template>
 
 <script>
+import { mapMutations } from "vuex";
 export default {
+  computed: {
+    categories() {
+      return this.$store.getters.categories.categoriesList;
+    },
+  },
   data() {
     return {
       form: {
@@ -472,7 +480,10 @@ export default {
     onSuccess(e) {},
     onComplete(e) {},
   },
-  mounted() {},
+  mounted() {
+    this.$store.dispatch("admin/categories/fetchCategories");
+  },
+  // setup() {},
 };
 </script>
 
