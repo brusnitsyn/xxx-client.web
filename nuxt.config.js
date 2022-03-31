@@ -34,6 +34,7 @@ export default {
     // https://go.nuxtjs.dev/axios
     "@nuxtjs/axios",
     "dropzone-nuxt",
+    "nuxt-vue-multiselect",
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios

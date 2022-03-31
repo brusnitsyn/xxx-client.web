@@ -43,6 +43,7 @@
               id="product-name"
               v-model="form.name"
               placeholder="Вибратор 'YAGA'"
+              required
               class="
                 p-2
                 focus:outline-none
@@ -60,85 +61,20 @@
 
           <div class="col-span-6 md:col-span-3 space-y-1">
             <label for="product-category" class="text-sm">Категория</label>
-            <div class="relative inline-flex w-full">
-              <svg
-                class="w-2 h-2 absolute top-0 right-0 m-4 pointer-events-none"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 412 232"
-              >
-                <path
-                  d="M206 171.144L42.678 7.822c-9.763-9.763-25.592-9.763-35.355 0-9.763 9.764-9.763 25.592 0 35.355l181 181c4.88 4.882 11.279 7.323 17.677 7.323s12.796-2.441 17.678-7.322l181-181c9.763-9.764 9.763-25.592 0-35.355-9.763-9.763-25.592-9.763-35.355 0L206 171.144z"
-                  fill="#648299"
-                  fill-rule="nonzero"
-                />
-              </svg>
-              <select
-                class="
-                  p-2
-                  focus:outline-none
-                  focus:border-opacity-0
-                  focus:ring-2
-                  focus:ring-accent
-                  border border-gray-300
-                  rounded-lg
-                  bg-gray-100
-                  shadow
-                  w-full
-                  appearance-none
-                "
-                id="product-color"
-                name="product-color"
-              >
-                <option>Выберите категорию</option>
-                <optgroup label="Для нее">
-                  <option>Анальные стимуляторы</option>
-                  <option>Вагинальные шарики</option>
-                  <option>Вакуумные помпы</option>
-                  <option>Вибраторы</option>
-                  <option>Вибротрусики, бабочки</option>
-                  <option>Духи с феомонами</option>
-                  <option>Лубриканты</option>
-                  <option>Препараты</option>
-                  <option>Стимуляторы для груди</option>
-                  <option>Клиторальные вибраторы</option>
-                  <option>Страпоны</option>
-                  <option>Фаллоимитаторы</option>
-                </optgroup>
-                <optgroup label="Для него">
-                  <option>Анальные стимуляторы</option>
-                  <option>Вакуумные помпы</option>
-                  <option>Вибраторы</option>
-                  <option>Вагины и мастурбаторы</option>
-                  <option>Кольца, насадки, утяжки</option>
-                  <option>Духи с феромонами</option>
-                  <option>Препараты</option>
-                  <option>Секс куклы</option>
-                  <option>Страпоны</option>
-                  <option>Фаллоимитаторы</option>
-                  <option>Экстендеры</option>
-                  <option>Фаллопротезы</option>
-                </optgroup>
-              </select>
-            </div>
-            <!-- <input
-              type="text"
-              v-model="form.category_id"
-              name="product-category"
-              id="product-category"
-              placeholder="Вибратор 'YAGA'"
-              class="
-                p-2
-                focus:outline-none
-                focus:border-opacity-0
-                focus:ring-2
-                focus:ring-accent
-                border border-gray-300
-                rounded-lg
-                bg-gray-100
-                shadow
-                w-full
-              "
-            /> -->
+            <multiselect
+              label="name"
+              track-by="name"
+              placeholder="Выберите категорию"
+              select-label="[Enter] Выбрать"
+              selected-label="Выбрано"
+              deselect-label="Отменить выбор"
+              group-values="children"
+              group-label="name"
+              v-model="form.category"
+              :options="categories"
+            >
+              <span slot="noResult">Нет результатов</span>
+            </multiselect>
           </div>
 
           <div class="col-span-6 md:col-span-3 space-y-1">
@@ -191,65 +127,34 @@
 
           <div class="col-span-6 md:col-span-3 space-y-1">
             <label for="product-color" class="text-sm">Цвет </label>
-            <div class="relative inline-flex w-full">
-              <svg
-                class="w-2 h-2 absolute top-0 right-0 m-4 pointer-events-none"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 412 232"
-              >
-                <path
-                  d="M206 171.144L42.678 7.822c-9.763-9.763-25.592-9.763-35.355 0-9.763 9.764-9.763 25.592 0 35.355l181 181c4.88 4.882 11.279 7.323 17.677 7.323s12.796-2.441 17.678-7.322l181-181c9.763-9.764 9.763-25.592 0-35.355-9.763-9.763-25.592-9.763-35.355 0L206 171.144z"
-                  fill="#648299"
-                  fill-rule="nonzero"
-                />
-              </svg>
-              <select
-                class="
-                  p-2
-                  focus:outline-none
-                  focus:border-opacity-0
-                  focus:ring-2
-                  focus:ring-accent
-                  border border-gray-300
-                  rounded-lg
-                  bg-gray-100
-                  shadow
-                  w-full
-                  appearance-none
-                "
-                id="product-color"
-                name="product-color"
-              >
-                <option>Выберите цвет</option>
-                <option>Красный</option>
-                <option>Синий</option>
-                <option>Желтый</option>
-                <option>Черный</option>
-                <option>Оранжевый</option>
-                <option>Пурпурный</option>
-                <option>Серый</option>
-                <option>Белый</option>
-              </select>
-            </div>
-            <!-- <input
-              type="text"
-              name="product-color"
-              id="product-color"
-              v-model="form.color"
-              placeholder="Желтый"
-              class="
-                p-2
-                focus:outline-none
-                focus:border-opacity-0
-                focus:ring-2
-                focus:ring-accent
-                border border-gray-300
-                rounded-lg
-                bg-gray-100
-                shadow
-                w-full
-              "
-            /> -->
+            <multiselect
+              label="name"
+              v-model="form.colors"
+              placeholder="Выберите цвет"
+              :searchable="false"
+              :options="colors"
+              :multiple="true"
+              select-label="Выбрать"
+              selected-label="Выбрано"
+              :close-on-select="false"
+              :clear-on-select="false"
+              :preserve-search="true"
+              track-by="name"
+              deselect-label="Отменить выбор"
+            >
+              <template slot="singleLabel" slot-scope="props">
+                <span class="option__desc">
+                  <span class="option__title">
+                    {{ props.option.name }}
+                  </span>
+                </span>
+              </template>
+              <template slot="option" slot-scope="props">
+                <div class="option__desc">
+                  <span class="option__title">{{ props.option.name }}</span>
+                </div>
+              </template>
+            </multiselect>
           </div>
 
           <div class="col-span-6 md:col-span-3 space-y-1">
@@ -332,6 +237,7 @@
               placeholder="Культовый стимулятор клитора 'YAGA' от немецкого бренда MAKENZE. Это не просто игрушка, это еще и эстетическое совершенство и удовольствие от бесконтактной стимуляции. Вы ощутите не только вакуумное давление, но и волновую пульсацию, растекающуюся бесконечным восторгом по всем рецепторам тела. Пользоваться изделием можно одной рукой при помощи 2 кнопок - нижняя кнопка включает/выключает (нужно удерживать 3 секунды) и увеличивает мощность всасывания, а верхняя уменьшает скорость."
               class="
                 p-2
+                resize-none
                 focus:outline-none
                 focus:border-opacity-0
                 focus:ring-2
@@ -351,23 +257,27 @@
               @vdropzone-error="onError"
               @vdropzone-success="onSuccess"
               @vdropzone-complete="onComplete"
+              :includeStyling="false"
+              :useCustomSlot="true"
               ref="myDropzone"
+              class="
+                py-16
+                border-2 border-dashed
+                flex
+                justify-center
+                items-center
+                hover:border-accent
+                group
+              "
               id="dropzone"
               :options="dropzoneOptions"
-            />
-            <!-- <label class="cursor-pointer">
+            >
               <div
                 class="
-                  py-16
-                  hover:border-accent hover:text-accent
-                  border-2 border-dashed
-                  text-gray-400
-                  rounded-md
-                  border-gray-300
                   flex flex-col
-                  gap-y-2
                   justify-center
                   items-center
+                  group-hover:text-accent
                 "
               >
                 <i>
@@ -384,12 +294,9 @@
                     />
                   </svg>
                 </i>
-                <div class="flex flex-col text-center">
-                  <span>Изображение товара</span>
-                  <span class="text-sm">Поддерживаемые форматы: JPG, PNG</span>
-                </div>
+                <span class="text-sm">Поддерживаемые форматы: PNG, JPG</span>
               </div>
-            </label> -->
+            </dropzone>
           </div>
         </div>
       </form>
@@ -411,6 +318,7 @@
         </button>
         <button
           type="submit"
+          @click="sendDataToApi"
           class="
             px-3
             py-2.5
@@ -428,51 +336,96 @@
 </template>
 
 <script>
-import { mapMutations } from "vuex";
+import { mapState } from "vuex";
 export default {
   computed: {
-    categories() {
-      return this.$store.getters.categories.categoriesList;
-    },
+    ...mapState({
+      categories: (state) => state.admin.products.categoriesList,
+      colors: (state) => state.admin.products.colorsList,
+    }),
   },
   data() {
     return {
       form: {
-        name: "",
-        category_id: 0,
-        manufacturer: "",
-        material: "",
-        color: "",
-        weight: "",
-        article: "",
-        cost: "",
-        description: "",
+        name: null,
+        category: null,
+        manufacturer: null,
+        material: null,
+        color: null,
+        weight: null,
+        article: null,
+        cost: null,
+        description: null,
       },
       dropzoneOptions: {
         url: "https://httpbin.org/post",
-
+        autoProcessQueue: false,
+        previewTemplate: this.template(),
         maxFilesize: 8,
         maxFiles: 1,
-        headers: { "My-Awesome-Header": "header value" },
       },
     };
   },
   methods: {
     resetForm() {
       this.form = {
-        name: "",
-        category_id: 0,
-        manufacturer: "",
-        material: "",
-        color: "",
-        weight: "",
-        article: "",
-        cost: "",
-        description: "",
+        name: null,
+        category: null,
+        manufacturer: null,
+        material: null,
+        color: null,
+        weight: null,
+        article: null,
+        cost: null,
+        description: null,
       };
     },
     sendCloseAction() {
       this.$store.commit("admin/ui/setNewProductDialogVisibility", false);
+    },
+    sendDataToApi() {
+      this.$axios
+        .$post(`http://127.0.0.1:8000/api/admin/products`, this.form)
+        .then((response) => {})
+        .catch((e) => {
+          // this.errors.push(e);
+        });
+    },
+    template() {
+      return `<div class="dz-preview dz-file-preview">
+                <div class="dz-image">
+                    <div data-dz-thumbnail-bg></div>
+                </div>
+                <div class="dz-details">
+                    <div class="dz-size"><span data-dz-size></span></div>
+                    <div class="dz-filename"><span data-dz-name></span></div>
+                </div>
+                <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div>
+                <div class="dz-error-message"><span data-dz-errormessage></span></div>
+                <div class="dz-success-mark"><i class="fa fa-check"></i></div>
+                <div class="dz-error-mark"><i class="fa fa-close"></i></div>
+            </div>
+        `;
+    },
+    thumbnail: function (file, dataUrl) {
+      var j, len, ref, thumbnailElement;
+      if (file.previewElement) {
+        file.previewElement.classList.remove("dz-file-preview");
+        ref = file.previewElement.querySelectorAll("[data-dz-thumbnail-bg]");
+        for (j = 0, len = ref.length; j < len; j++) {
+          thumbnailElement = ref[j];
+          thumbnailElement.alt = file.name;
+          thumbnailElement.style.backgroundImage = 'url("' + dataUrl + '")';
+        }
+        return setTimeout(
+          (function (_this) {
+            return function () {
+              return file.previewElement.classList.add("dz-image-preview");
+            };
+          })(this),
+          1
+        );
+      }
     },
 
     onFileAdded(e) {},
@@ -481,11 +434,24 @@ export default {
     onComplete(e) {},
   },
   mounted() {
-    this.$store.dispatch("admin/categories/fetchCategories");
+    this.$store.dispatch("admin/products/fetchCategories");
+    this.$store.dispatch("admin/products/fetchColors");
   },
   // setup() {},
 };
 </script>
 
 <style>
+.vue-dropzone {
+  border: 2px dashed #e5e5e5;
+  font-family: Arial, sans-serif;
+  letter-spacing: 0.2px;
+  transition: 0.2s linear;
+}
+
+.vue-dropzone:hover {
+  border-color: #da5978;
+  color: #da5978;
+  background-color: #fff;
+}
 </style>
