@@ -356,9 +356,10 @@ export default {
         article: null,
         cost: null,
         description: null,
+        image_url: null,
       },
       dropzoneOptions: {
-        url: "https://httpbin.org/post",
+        url: "http://127.0.0.1:8000/api/admin/products/image",
         autoProcessQueue: false,
         previewTemplate: this.template(),
         maxFilesize: 8,
@@ -378,17 +379,30 @@ export default {
         article: null,
         cost: null,
         description: null,
+        image_url: null,
       };
     },
     sendCloseAction() {
       this.$store.commit("admin/ui/setNewProductDialogVisibility", false);
     },
     sendDataToApi() {
+      let formData = new FormData();
+      formData.append("file", this.$refs.myDropzone.getAcceptedFiles());
+      this.$axios
+        .$post(`http://127.0.0.1:8000/api/admin/products/image`, formData)
+        .then((response) => {
+          if (response.data) {
+            this.form.image_url = response.data.path;
+          }
+        })
+        .catch((e) => {
+          // this.errors.push(e);
+        });
       this.$axios
         .$post(`http://127.0.0.1:8000/api/admin/products`, this.form)
         .then((response) => {})
         .catch((e) => {
-          // this.errors.push(e);
+          console.log(e.message);
         });
     },
     template() {

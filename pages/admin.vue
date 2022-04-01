@@ -870,29 +870,29 @@
       </div>
     </div>
     <AdminProductsNewProductDialog v-if="dialogVisibility" />
+    <AdminAcceptDialog v-if="acceptDialogVisibility" />
   </div>
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
+import { mapMutations } from "vuex";
 export default {
   data() {
-    return {
-
-    }
+    return {};
   },
   computed: {
     dialogVisibility() {
-      return this.$store.state.admin.ui.visibilityNewProductDialog
-    }
+      return this.$store.state.admin.ui.visibilityNewProductDialog;
+    },
+    acceptDialogVisibility() {
+      return this.$store.state.admin.ui.visibilityAcceptDialog;
+    },
   },
-  methods: {
-
-  },
+  methods: {},
   mounted() {
     //this.$store.commit('admin/ui/setNewProductDialogVisibility', false)
-  }
-}
+  },
+};
 </script>
 
 <style>
