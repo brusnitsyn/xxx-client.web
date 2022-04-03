@@ -257,8 +257,10 @@
               @vdropzone-error="onError"
               @vdropzone-success="onSuccess"
               @vdropzone-complete="onComplete"
+              @vdropzone-thumbnail="onThumbnail"
               :includeStyling="false"
               :useCustomSlot="true"
+              :destroyDropzone="true"
               ref="myDropzone"
               class="
                 py-16
@@ -279,6 +281,7 @@
                   items-center
                   group-hover:text-accent
                 "
+                data-dropzone-placeholder
               >
                 <i>
                   <svg
@@ -336,31 +339,23 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapGetters } from "vuex";
 export default {
   computed: {
     ...mapState({
       categories: (state) => state.admin.products.categoriesList,
       colors: (state) => state.admin.products.colorsList,
+      productData: (state) => state.admin.products.productData,
     }),
+    ...mapGetters("admin/products", ["getProductData"]),
   },
   data() {
     return {
-      form: {
-        name: null,
-        category: null,
-        manufacturer: null,
-        material: null,
-        color: null,
-        weight: null,
-        article: null,
-        cost: null,
-        description: null,
-        image_url: null,
-      },
+      form: {},
       dropzoneOptions: {
         url: "http://127.0.0.1:8000/api/admin/products/image",
-        autoProcessQueue: false,
+        autoProcessQueue: true,
+        addRemoveLinks: true,
         previewTemplate: this.template(),
         maxFilesize: 8,
         maxFiles: 1,
@@ -369,55 +364,70 @@ export default {
   },
   methods: {
     resetForm() {
-      this.form = {
+      let data = {
         name: null,
         category: null,
         manufacturer: null,
         material: null,
-        color: null,
         weight: null,
         article: null,
         cost: null,
         description: null,
         image_url: null,
       };
+
+      this.$refs.myDropzone.removeAllFiles(true);
+
+      this.$store.commit("admin/products/setProductData", data);
     },
     sendCloseAction() {
       this.$store.commit("admin/ui/setNewProductDialogVisibility", false);
     },
     sendDataToApi() {
-      let formData = new FormData();
-      formData.append("file", this.$refs.myDropzone.getAcceptedFiles());
-      this.$axios
-        .$post(`http://127.0.0.1:8000/api/admin/products/image`, formData)
-        .then((response) => {
-          if (response.data) {
-            this.form.image_url = response.data.path;
-          }
-        })
-        .catch((e) => {
-          // this.errors.push(e);
-        });
+      // const formConfig = { "content-type": "multipart/form-data" };
+      // let formData = new FormData();
+      // formData.append("file", this.$refs.myDropzone.getAcceptedFiles());
+      // this.$axios
+      //   .$post(
+      //     `http://127.0.0.1:8000/api/admin/products/image`,
+      //     formData,
+      //     formConfig
+      //   )
+      //   .then((response) => {
+      //     if (response.data) {
+      //       this.form.image_url = response.data.path;
+      //     }
+      //   })
+      //   .catch((e) => {
+      //     // this.errors.push(e);
+      //   });
       this.$axios
         .$post(`http://127.0.0.1:8000/api/admin/products`, this.form)
-        .then((response) => {})
+        .then((response) => {
+          if (response.data) {
+            this.$refs.myDropzone.removeAllFiles(true);
+            this.resetForm();
+            this.$store.commit("admin/products/addProduct", response.data);
+          }
+        })
         .catch((e) => {
           console.log(e.message);
         });
     },
     template() {
-      return `<div class="dz-preview dz-file-preview">
-                <div class="dz-image">
-                    <div data-dz-thumbnail-bg></div>
+      return `<div class="w-48 h-48 dz-file-preview">
+                <div class="w-full h-full">
+                    <div class="w-full h-full" data-dz-thumbnail-bg></div>
                 </div>
-                <div class="dz-details">
-                    <div class="dz-size"><span data-dz-size></span></div>
-                    <div class="dz-filename"><span data-dz-name></span></div>
+                <div class="dz-progress">
+                  <span class="dz-upload" data-dz-uploadprogress></span>
                 </div>
-                <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div>
-                <div class="dz-error-message"><span data-dz-errormessage></span></div>
-                <div class="dz-success-mark"><i class="fa fa-check"></i></div>
-                <div class="dz-error-mark"><i class="fa fa-close"></i></div>
+                <div class="dz-error-message">
+                  <span data-dz-errormessage></span>
+                </div>
+                <div class="dz-error-mark">
+
+                </div>
             </div>
         `;
     },
@@ -442,30 +452,38 @@ export default {
       }
     },
 
-    onFileAdded(e) {},
-    onError(e) {},
-    onSuccess(e) {},
+    onThumbnail(file, dataURL) {
+      // console.log(dataURL);
+      this.thumbnail(file, dataURL);
+    },
+    onFileAdded(file) {
+      // console.log(file);
+      // this.thumbnail(file, file.dataURL);
+    },
+    onError(file, message) {
+      console.log(message);
+    },
+    onSuccess(file, response) {
+      console.log(
+        "File Successfully Uploaded with file name: " + response.data.path
+      );
+      this.form.image_url = response.data.path;
+    },
     onComplete(e) {},
   },
   mounted() {
     this.$store.dispatch("admin/products/fetchCategories");
     this.$store.dispatch("admin/products/fetchColors");
   },
+  created() {
+    this.form = Object.assign(
+      {},
+      this.getProductData
+    );
+  },
   // setup() {},
 };
 </script>
 
 <style>
-.vue-dropzone {
-  border: 2px dashed #e5e5e5;
-  font-family: Arial, sans-serif;
-  letter-spacing: 0.2px;
-  transition: 0.2s linear;
-}
-
-.vue-dropzone:hover {
-  border-color: #da5978;
-  color: #da5978;
-  background-color: #fff;
-}
 </style>

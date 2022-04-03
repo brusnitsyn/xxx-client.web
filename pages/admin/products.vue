@@ -156,6 +156,7 @@
               <td class="px-6 py-4 text-right">
                 <a
                   href="#"
+                  @click="onEditProduct(product)"
                   class="
                     font-medium
                     text-blue-600
@@ -196,14 +197,11 @@ export default {
     }),
   },
   data() {
-    return {
-      isOpenDialog: false,
-    };
+    return {};
   },
   methods: {
     onOpenDialog() {
       this.$store.commit("admin/ui/setNewProductDialogVisibility", true);
-      //this.isOpenDialog = this.isOpenDialog ? false : true
     },
     onShowAcceptDialog() {
       this.$store.commit("admin/ui/setAcceptDialogHeader", "Удаление товара");
@@ -216,6 +214,22 @@ export default {
     },
     onCheckAllProduct() {
       //this.products
+    },
+    onEditProduct(product) {
+      let data = {
+        name: product.name,
+        category: product.category,
+        manufacturer: product.manufacturer,
+        colors: product.colors,
+        material: product.material,
+        weight: product.weight,
+        article: product.article,
+        cost: product.cost,
+        description: product.description,
+        image_url: product.image_url,
+      };
+      this.$store.commit("admin/products/setProductData", data);
+      this.$store.commit("admin/ui/setNewProductDialogVisibility", true);
     },
   },
   mounted() {

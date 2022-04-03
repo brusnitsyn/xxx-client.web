@@ -1,7 +1,20 @@
 export const state = () => ({
   categoriesList: [],
   colorsList: [],
-  productsList: []
+  productsList: [],
+
+  productData: {
+    name: null,
+    category: null,
+    manufacturer: null,
+    material: null,
+    weight: null,
+    article: null,
+    colors: null,
+    cost: null,
+    description: null,
+    image_url: null,
+  },
 });
 
 export const mutations = {
@@ -13,6 +26,14 @@ export const mutations = {
   },
   setProductsList(state, productsList) {
     state.productsList = productsList;
+  },
+
+  addProduct(state, product) {
+    state.productsList.push(product);
+  },
+
+  setProductData(state, productData) {
+    state.productData = productData;
   },
   // setCheckProductItem(state, item, value) {
   //   state.productsList[item].isChecked = value;
@@ -36,11 +57,28 @@ export const actions = {
     let products = await this.$axios.$get(
       "http://127.0.0.1:8000/api/admin/products"
     );
-    let data = products.data;
-    for (let index = 0; index < data.length; index++) {
-      const element = data[index];
-      element['isChecked'] = false
-    }
+
+    // resort color (not rule)
+    let data = products.data.map(function (obj) {
+      return {
+        article: obj.article,
+        category: obj.category,
+        cost: obj.cost,
+        description: obj.description,
+        id: obj.id,
+        image_url: obj.image_url,
+        manufacturer: obj.manufacturer,
+        material: obj.material,
+        name: obj.name,
+        weight: obj.weight,
+        colors: obj.colors.map(function (a) {
+          return a.color;
+        }),
+      };
+    });
+    data.forEach((product) => {
+      product["isChecked"] = false;
+    });
     context.commit("setProductsList", data);
   },
   // setCheckedProductItem(context, payload) {
@@ -57,5 +95,8 @@ export const getters = {
   },
   getProductsList: (state) => {
     return state.productsList;
+  },
+  getProductData: (state) => {
+    return state.productData;
   },
 };
