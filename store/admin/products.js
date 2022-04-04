@@ -43,43 +43,45 @@ export const mutations = {
 export const actions = {
   async fetchCategories(context) {
     let categories = await this.$axios.$get(
-      "http://127.0.0.1:8000/api/admin/categories"
+      "/api/admin/categories"
     );
     context.commit("setCategoriesList", categories.data);
   },
   async fetchColors(context) {
     let colors = await this.$axios.$get(
-      "http://127.0.0.1:8000/api/admin/colors"
+      "/api/admin/colors"
     );
     context.commit("setColorsList", colors.data);
   },
   async fetchProducts(context) {
     let products = await this.$axios.$get(
-      "http://127.0.0.1:8000/api/admin/products"
+      "/api/admin/products"
     );
 
     // resort color (not rule)
-    let data = products.data.map(function (obj) {
-      return {
-        article: obj.article,
-        category: obj.category,
-        cost: obj.cost,
-        description: obj.description,
-        id: obj.id,
-        image_url: obj.image_url,
-        manufacturer: obj.manufacturer,
-        material: obj.material,
-        name: obj.name,
-        weight: obj.weight,
-        colors: obj.colors.map(function (a) {
-          return a.color;
-        }),
-      };
-    });
-    data.forEach((product) => {
-      product["isChecked"] = false;
-    });
-    context.commit("setProductsList", data);
+    if (products.data.length > 0) {
+      let data = products.data.map(function (obj) {
+        return {
+          article: obj.article,
+          category: obj.category,
+          cost: obj.cost,
+          description: obj.description,
+          id: obj.id,
+          image_url: obj.image_url,
+          manufacturer: obj.manufacturer,
+          material: obj.material,
+          name: obj.name,
+          weight: obj.weight,
+          colors: obj.colors.map(function (a) {
+            return a.color;
+          }),
+        };
+      });
+      data.forEach((product) => {
+        product["isChecked"] = false;
+      });
+      context.commit("setProductsList", data);
+    }
   },
   // setCheckedProductItem(context, payload) {
   //   context.commit

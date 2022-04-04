@@ -573,7 +573,7 @@
                       </p>
                       <p class="text-sm text-gray-500 truncate">
                         <a
-                          href="/cdn-cgi/l/email-protection"
+                          href="#"
                           class="__cf_email__"
                           data-cfemail="17727a767e7b57607e7973646372653974787a"
                           >[email&#160;protected]</a
@@ -608,7 +608,7 @@
                       </p>
                       <p class="text-sm text-gray-500 truncate">
                         <a
-                          href="/cdn-cgi/l/email-protection"
+                          href="#"
                           class="__cf_email__"
                           data-cfemail="d4b1b9b5bdb894a3bdbab0a7a0b1a6fab7bbb9"
                           >[email&#160;protected]</a
@@ -643,7 +643,7 @@
                       </p>
                       <p class="text-sm text-gray-500 truncate">
                         <a
-                          href="/cdn-cgi/l/email-protection"
+                          href="#"
                           class="__cf_email__"
                           data-cfemail="57323a363e3b17203e3933242332257934383a"
                           >[email&#160;protected]</a
@@ -678,7 +678,7 @@
                       </p>
                       <p class="text-sm text-gray-500 truncate">
                         <a
-                          href="/cdn-cgi/l/email-protection"
+                          href="#"
                           class="__cf_email__"
                           data-cfemail="284d45494144685f41464c5b5c4d5a064b4745"
                           >[email&#160;protected]</a
@@ -713,7 +713,7 @@
                       </p>
                       <p class="text-sm text-gray-500 truncate">
                         <a
-                          href="/cdn-cgi/l/email-protection"
+                          href="#"
                           class="__cf_email__"
                           data-cfemail="a2c7cfc3cbcee2d5cbccc6d1d6c7d08cc1cdcf"
                           >[email&#160;protected]</a

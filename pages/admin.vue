@@ -133,7 +133,7 @@
               </svg>
             </button>
             <a
-              href="https://demo.themesberg.com/windster/pricing/"
+              href="#"
               class="
                 hidden
                 sm:inline-flex
@@ -288,7 +288,6 @@
                 </li>
                 <li>
                   <a
-                    href="/extensions"
                     target="_blank"
                     class="
                       text-base text-gray-900
@@ -864,7 +863,7 @@
         <p class="text-center text-sm text-gray-500 my-10">
           &copy; 2022
           <a href="#" class="hover:underline" target="_blank"
-            >xxx.ru - Admin Panel</a
+            >willbehot.ru - Admin Panel</a
           >. All rights reserved.
         </p>
       </div>

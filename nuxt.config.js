@@ -1,7 +1,7 @@
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: "xxx-client.web",
+    title: "WillBeHot - закупись пока не стало жарко",
     htmlAttrs: {
       lang: "ru",
     },

@@ -126,7 +126,7 @@
           </div>
 
           <div class="col-span-6 md:col-span-3 space-y-1">
-            <label for="product-color" class="text-sm">Цвет </label>
+            <label for="product-color" class="text-sm">Цвет</label>
             <multiselect
               label="name"
               v-model="form.colors"
@@ -349,11 +349,16 @@ export default {
     }),
     ...mapGetters("admin/products", ["getProductData"]),
   },
+  watch: {
+    getProductData(oldValue, newValue) {
+      this.form = newValue;
+    },
+  },
   data() {
     return {
       form: {},
       dropzoneOptions: {
-        url: "http://127.0.0.1:8000/api/admin/products/image",
+        url: "/api/admin/products/image",
         autoProcessQueue: true,
         addRemoveLinks: true,
         previewTemplate: this.template(),
@@ -381,6 +386,7 @@ export default {
       this.$store.commit("admin/products/setProductData", data);
     },
     sendCloseAction() {
+      this.resetForm();
       this.$store.commit("admin/ui/setNewProductDialogVisibility", false);
     },
     sendDataToApi() {
@@ -389,7 +395,7 @@ export default {
       // formData.append("file", this.$refs.myDropzone.getAcceptedFiles());
       // this.$axios
       //   .$post(
-      //     `http://127.0.0.1:8000/api/admin/products/image`,
+      //     `/api/admin/products/image`,
       //     formData,
       //     formConfig
       //   )
@@ -402,10 +408,9 @@ export default {
       //     // this.errors.push(e);
       //   });
       this.$axios
-        .$post(`http://127.0.0.1:8000/api/admin/products`, this.form)
+        .$post(`/api/admin/products`, this.form)
         .then((response) => {
           if (response.data) {
-            this.$refs.myDropzone.removeAllFiles(true);
             this.resetForm();
             this.$store.commit("admin/products/addProduct", response.data);
           }
@@ -453,7 +458,6 @@ export default {
     },
 
     onThumbnail(file, dataURL) {
-      // console.log(dataURL);
       this.thumbnail(file, dataURL);
     },
     onFileAdded(file) {
@@ -464,9 +468,6 @@ export default {
       console.log(message);
     },
     onSuccess(file, response) {
-      console.log(
-        "File Successfully Uploaded with file name: " + response.data.path
-      );
       this.form.image_url = response.data.path;
     },
     onComplete(e) {},
@@ -476,12 +477,8 @@ export default {
     this.$store.dispatch("admin/products/fetchColors");
   },
   created() {
-    this.form = Object.assign(
-      {},
-      this.getProductData
-    );
+    this.form = Object.assign({}, this.getProductData);
   },
-  // setup() {},
 };
 </script>
 
