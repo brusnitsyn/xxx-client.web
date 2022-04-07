@@ -887,7 +887,11 @@ export default {
       return this.$store.state.admin.ui.visibilityAcceptDialog;
     },
   },
-  methods: {},
+  methods: {
+    deleteProduct(product) {
+      this.$store
+    }
+  },
   mounted() {
     //this.$store.commit('admin/ui/setNewProductDialogVisibility', false)
   },
