@@ -31,6 +31,22 @@ export const mutations = {
   addProduct(state, product) {
     state.productsList.push(product);
   },
+  deleteProduct(state, product) {
+    // state.productsList.filter(function (e) {
+    //   e != value
+    // });
+    // let index = state.productsList.indexOf(product);
+    // if(index > -1) {
+    //
+    // }
+    state.productsList.forEach(element => {
+      if (element['id'] == product['id']) {
+        let index = state.productsList.indexOf(element);
+        console.log(index)
+      }
+    });
+
+  },
 
   setProductData(state, productData) {
     state.productData = productData;
@@ -43,19 +59,19 @@ export const mutations = {
 export const actions = {
   async fetchCategories(context) {
     let categories = await this.$axios.$get(
-      "/api/admin/categories"
+      "http://127.0.0.1:8000/api/admin/categories"
     );
     context.commit("setCategoriesList", categories.data);
   },
   async fetchColors(context) {
     let colors = await this.$axios.$get(
-      "/api/admin/colors"
+      "http://127.0.0.1:8000/api/admin/colors"
     );
     context.commit("setColorsList", colors.data);
   },
   async fetchProducts(context) {
     let products = await this.$axios.$get(
-      "/api/admin/products"
+      "http://127.0.0.1:8000/api/admin/products"
     );
 
     // resort color (not rule)
@@ -82,6 +98,12 @@ export const actions = {
       });
       context.commit("setProductsList", data);
     }
+  },
+  deleteProduct() {
+    //let index = arr.indexOf(value);
+    // let deletedProduct = await this.$axios.$delete(
+    //   "/api/admin/colors"
+    // );
   },
   // setCheckedProductItem(context, payload) {
   //   context.commit

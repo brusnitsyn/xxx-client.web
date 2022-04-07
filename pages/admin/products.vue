@@ -167,17 +167,18 @@
                 >
               </td>
               <td class="px-6 py-4 text-left">
-                <a
+                <button
                   href="#"
-                  @click="onShowAcceptDialog"
+                  @click="onDeleteProduct(this)"
                   class="
                     font-medium
                     text-accent
                     dark:text-blue-500
                     hover:underline
                   "
-                  >Удалить</a
                 >
+                  Удалить
+                </button>
               </td>
             </tr>
           </tbody>
@@ -214,6 +215,9 @@ export default {
     },
     onCheckAllProduct() {
       //this.products
+    },
+    onDeleteProduct(product) {
+      this.$store.commit("admin/products/deleteProduct", product);
     },
     onEditProduct(product) {
       let data = {
